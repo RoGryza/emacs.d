@@ -1,0 +1,120 @@
+#===== PERSONAL ======
+
+IMAPAccount personal-gmail
+Host imap.gmail.com
+User rogryza@gmail.com
+PassCmd "pass local/gmail/mbsync"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore personal-gmail-remote
+Account personal-gmail
+
+MaildirStore personal-gmail-local
+Subfolders Verbatim
+Path ~/.mail/personal-gmail
+Inbox ~/.mail/personal-gmail/INBOX
+
+Channel personal-gmail-inbox
+Master :personal-gmail-remote:
+Slave :personal-gmail-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-gmail-trash
+Master :personal-gmail-remote:"[Gmail]/Trash"
+Slave :personal-gmail-local:"[personal].Trash"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-gmail-sent
+Master :personal-gmail-remote:"[Gmail]/Sent Mail"
+Slave :personal-gmail-local:"[personal].Sent Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-gmail-all
+Master :personal-gmail-remote:"[Gmail]/All Mail"
+Slave :personal-gmail-local:"[personal].All Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-gmail-starred
+Master :personal-gmail-remote:"[Gmail]/Starred"
+Slave :personal-gmail-local:"[personal].Starred"
+Create Both
+Expunge Both
+SyncState *
+
+Group personal-gmail
+Channel personal-gmail-inbox
+Channel personal-gmail-sent
+Channel personal-gmail-trash
+Channel personal-gmail-all
+Channel personal-gmail-starred
+
+#===== WUZU ======
+
+# IMAPAccount wuzu-gmail
+# Host imap.gmail.com
+# User rodrigo@wuzu.io
+# PassCmd "pass local/gmail/wuzu-mbsync"
+# SSLType IMAPS
+# AuthMechs LOGIN
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# IMAPStore wuzu-gmail-remote
+# Account wuzu-gmail
+
+# MaildirStore wuzu-gmail-local
+# Subfolders Verbatim
+# Path ~/.mail/wuzu-gmail
+# Inbox ~/.mail/wuzu-gmail/INBOX
+
+# Channel wuzu-gmail-inbox
+# Master :wuzu-gmail-remote:
+# Slave :wuzu-gmail-local:
+# Patterns "INBOX"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# Channel wuzu-gmail-trash
+# Master :wuzu-gmail-remote:"[Gmail]/Bin"
+# Slave :wuzu-gmail-local:"[work].Bin"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# Channel wuzu-gmail-sent
+# Master :wuzu-gmail-remote:"[Gmail]/Sent Mail"
+# Slave :wuzu-gmail-local:"[work].Sent Mail"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# Channel wuzu-gmail-all
+# Master :wuzu-gmail-remote:"[Gmail]/All Mail"
+# Slave :wuzu-gmail-local:"[work].All Mail"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# Channel wuzu-gmail-starred
+# Master :wuzu-gmail-remote:"[Gmail]/Starred"
+# Slave :wuzu-gmail-local:"[work].Starred"
+# Create Both
+# Expunge Both
+# SyncState *
+
+# Group wuzu-gmail
+# Channel wuzu-gmail-inbox
+# Channel wuzu-gmail-sent
+# Channel wuzu-gmail-trash
+# Channel wuzu-gmail-all
+# Channel wuzu-gmail-starred
