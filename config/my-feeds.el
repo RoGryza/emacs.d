@@ -48,4 +48,5 @@
           "http://haskellweekly.news/haskell-weekly.rss"
           "http://cs-syd.eu/rss.xml"
           "http://mypy-lang.blogspot.com/feeds/posts/default"
-          "https://weekly.nixos.org/feeds/all.rss.xml")))
+          "https://weekly.nixos.org/feeds/all.rss.xml"
+          "https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom")))

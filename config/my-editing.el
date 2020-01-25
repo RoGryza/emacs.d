@@ -1,6 +1,7 @@
 (provide 'my-editing)
 
 (delete-selection-mode t)
+(setq-default fill-column 100)
 
 (defun my-proj-relative-buf-name ()
   (ignore-errors
