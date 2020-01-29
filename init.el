@@ -74,6 +74,7 @@
 (require 'my-buffers)
 (require 'my-files)
 (require 'my-dired)
+(require 'my-direnv)
 (require 'my-editing)
 (require 'my-autocomplete)
 (require 'my-ddg)
