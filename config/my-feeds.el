@@ -50,4 +50,5 @@
           "http://mypy-lang.blogspot.com/feeds/posts/default"
           "https://weekly.nixos.org/feeds/all.rss.xml"
           "https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom"
-          "http://www.indiegamejams.com/feed/")))
+          "http://www.indiegamejams.com/feed/"
+          "https://blog.linuxserver.io/rss/")))
