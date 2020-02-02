@@ -6,6 +6,8 @@
 (setq-default cursor-type 'bar)
 (blink-cursor-mode)
 
+(setq-default show-trailing-whitespace t)
+
 (use-package dracula-theme
   :ensure t
   :config
