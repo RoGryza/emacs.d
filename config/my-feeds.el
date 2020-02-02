@@ -51,4 +51,6 @@
           "https://weekly.nixos.org/feeds/all.rss.xml"
           "https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom"
           "http://www.indiegamejams.com/feed/"
-          "https://blog.linuxserver.io/rss/")))
+          "https://blog.linuxserver.io/rss/"
+          "https://blog.polymath.network/tech/home"
+          "http://0pointer.net/blog/index.atom")))
