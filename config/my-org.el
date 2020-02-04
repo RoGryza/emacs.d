@@ -1,5 +1,7 @@
 (provide 'my-org)
 
+(defvar my-leader)
+
 (require 'cl)
 (require 'f)
 
@@ -80,10 +82,22 @@
          (file+headline my-bookmarks-file "Bookmarks")
          "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:")))
 
+(defun my-org-capture ()
+  (interactive)
+  (if (fboundp 'counsel-org-capture)
+      (counsel-org-capture)
+    (org-capture)))
+
+(general-define-key
+ :prefix my-leader
+ :keymaps 'normal
+
+ "c" '(my-org-capture :which-key "org-capture"))
+
 (use-package org-projectile
   :ensure t
   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
-         ("C-c c" . org-capture))
+         ("C-c c" . my-org-capture))
   :config
   (org-projectile-per-project)
   (setq org-projectile-projects-directory (my-org-file "projects"))
