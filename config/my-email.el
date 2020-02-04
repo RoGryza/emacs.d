@@ -19,7 +19,7 @@
 (defvar mu4e-change-filenames-when-moving t)
 (defvar mu4e-contexts)
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
+(add-to-list 'load-path "/run/current-system/sw/share/emacs/site-lisp/")
 (autoload 'mu4e "mu4e" nil t)
 (autoload 'mu4e-update-index "mu4e" nil t)
 (autoload 'mu4e-update-mail-and-index "mu4e" nil t)
