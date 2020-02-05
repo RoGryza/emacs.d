@@ -53,4 +53,5 @@
           "http://www.indiegamejams.com/feed/"
           "https://blog.linuxserver.io/rss/"
           "https://blog.polymath.network/tech/home"
-          "http://0pointer.net/blog/index.atom")))
+          "http://0pointer.net/blog/index.atom"
+          "https://www.kill-the-newsletter.com/feeds/vbhbge3p0xf85tvgr3wy.xml")))
