@@ -12,20 +12,17 @@
 
 (use-package slime-company
   :ensure t
-  :defer t
   :commands slime-company)
 
 (use-package slime
   :ensure t
-  :defer t
   :commands (slime slime-lisp-mode-hook slime-mode)
   :custom
-  (inferior-lisp-program (executable-find "sbcl"))
   (slime-complete-symbol*-fancy t)
   (slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
   (slime-contribs '(slime-fancy))
   :config
-  (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  (setq slime-contibs
+  (setq inferior-lisp-program (executable-find "sbcl"))
+  (setq slime-contribs
         '(slime-fancy slime-asdf slime-quicklisp slime-cl-indent))
-  (slime-setup '(slime-fancy slime-asdf slime-quicklisp slime-company slime-cl-indent)))
+  (slime-setup slime-contribs))
