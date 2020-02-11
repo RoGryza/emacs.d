@@ -38,10 +38,13 @@
                              my-tickler-file))
 (setq org-archive-location "%s_archive::datetree/")
 (setq org-default-notes-file my-inbox-file
-      org-refile-targets `((my-gtd-file :maxlevel . 3)
-                           (my-tickler-file :maxlevel . 3)
-                           (my-someday-file :maxlevel . 3)
-                           (my-bookmarks-file :maxlevel . 3)))
+      org-refile-use-outline-path t
+      org-refile-allow-creating-parent-nodes 'confirm
+      org-outline-path-complete-in-steps nil
+      org-refile-targets `((my-gtd-file :level . 1)
+                           (my-tickler-file :level . 1)
+                           (my-someday-file :level . 1)
+                           (my-bookmarks-file :level . 1)))
 (setq org-log-reschedule 'time
       org-log-done 'time)
 
@@ -86,7 +89,9 @@
  "c" '(org-ctrl-c-ctrl-c :which-key "C-c")
  "t" #'org-todo
  "w" #'org-refile
- "a" #'org-archive-subtree)
+ "a" #'org-archive-subtree
+ "p" #'org-set-property
+ "P" #'org-set-property-and-value)
 
 (general-define-key
  :prefix (concat my-leader "o")
