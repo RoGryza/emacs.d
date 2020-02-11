@@ -35,7 +35,7 @@
   :general
   ("C-c p" #'projectile-command-map)
   (:keymaps 'normal
-            (concat my-leader "p") '(projectile-command-map :which-key "projectile"))
+            (concat my-leader "p") '(:keymap projectile-command-map :which-key "projectile"))
   :config
   (add-to-list 'projectile-globally-ignored-directories "elpa")
   (add-to-list 'projectile-globally-ignored-directories ".cache")
@@ -44,7 +44,7 @@
   (def-projectile-commander-method ?x
     "Open eshell in project root."
     (projectile-run-eshell))
-  
+
   (projectile-mode)
   (setq projectile-switch-project-action 'projectile-commander))
 

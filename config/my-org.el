@@ -1,6 +1,7 @@
 (provide 'my-org)
 
 (defvar my-leader)
+(declare my-major-mode-def)
 
 (require 'cl)
 (require 'f)
@@ -8,6 +9,8 @@
 (require 'org)
 (defvar my-org-dir (expand-file-name "~/Dropbox/notes")
   "Personal org files path")
+(with-eval-after-load 'projectile
+  (projectile-add-known-project my-org-dir))
 (defun my-org-file (name)
   "Get path to a file inside my-org-dir"
   (f-join my-org-dir name))
@@ -21,32 +24,15 @@
            do (with-current-buffer buf
                 (revert-buffer t t t))))
 
-;; (defmacro my-def-org-files (&rest names) TODO why won't this work?
-;;   "Macro to define my-*-file vars referencing my default org file paths"
-;;   (cons 'progn
-;;         (cl-loop for name in (mapcar #'symbol-name names)
-;;                  collect `(defvar ,(make-symbol (concat "my-" name "-file"))
-;;                             (my-org-file ,(concat name ".org"))
-;;                             ,(format "Path to my %s file" name)))))
-;; (my-def-org-files inbox gtd tickler someday readlater)
-(progn
-  (defvar my-inbox-file
-    (my-org-file "inbox.org")
-    "Path to my inbox file")
-  (defvar my-gtd-file
-    (my-org-file "gtd.org")
-    "Path to my gtd file")
-  (defvar my-tickler-file
-    (my-org-file "tickler.org")
-    "Path to my tickler file")
-  (defvar my-someday-file
-    (my-org-file "someday.org")
-    "Path to my someday file")
-  (defvar my-bookmarks-file
-    (my-org-file "bookmarks.org")
-    "Path to my bookmarks file")
-  (defvar my-lists-file
-    (my-org-file "lists.org")))
+(defmacro my-def-org-files (&rest names)
+          "Macro to define my-*-file vars referencing my default org file paths"
+          (cons 'progn
+                (cl-loop for name in (mapcar #'symbol-name names)
+                         collect `(defvar ,(intern (concat "my-" name "-file"))
+                                    (my-org-file ,(concat name ".org"))
+                                    ,(format "Path to my %s file" name)))))
+(my-def-org-files inbox bookmarks gtd tickler someday readlater lists)
+
 (setq org-agenda-files (list my-inbox-file
                              my-gtd-file
                              my-tickler-file))
@@ -88,21 +74,39 @@
       (counsel-org-capture)
     (org-capture)))
 
+(defun my-org-find-file ()
+  (interactive)
+  (counsel-find-file my-org-dir))
+
+(my-major-mode-def org-mode-map
+ "" '(nil :which-key "org-mode")
+
+ "<" #'org-promote-subtree
+ ">" #'org-demote-subtree
+ "c" '(org-ctrl-c-ctrl-c :which-key "C-c")
+ "t" #'org-todo
+ "w" #'org-refile
+ "a" #'org-archive-subtree)
+
 (general-define-key
- :prefix my-leader
+ :prefix (concat my-leader "o")
  :keymaps 'normal
 
- "c" '(my-org-capture :which-key "org-capture"))
+ "" '(nil :which-key "org")
 
-(use-package org-projectile
-  :ensure t
-  :bind (("C-c n p" . org-projectile-project-todo-completing-read)
-         ("C-c c" . my-org-capture))
-  :config
-  (org-projectile-per-project)
-  (setq org-projectile-projects-directory (my-org-file "projects"))
-  (setq org-projectile-per-project-filepath "TODO.org")
-  (add-to-list 'org-agenda-files org-projectile-projects-directory t))
+ "a" #'org-agenda
+ "c" '(my-org-capture :which-key "org-capture")
+ "p" #'my-org-find-file
+ "s" #'org-save-all-org-buffers)
+
+(general-define-key
+ :prefix (concat my-leader "ol")
+ :keymaps 'normal
+
+ "" '(nil :which-key "link")
+
+ "y" #'org-store-link
+ "p" #'org-insert-last-stored-link)
 
 (use-package evil-org
   :ensure t

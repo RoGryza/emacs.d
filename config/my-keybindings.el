@@ -19,3 +19,8 @@
 
     "" '(nil :which-key "<leader>")
     "w" #'save-buffer))
+
+(general-create-definer my-major-mode-def
+  :states '(normal insert)
+  :prefix (concat my-leader "m")
+  :non-normal-prefix "M-m")
