@@ -1,8 +1,14 @@
 (provide 'my-feeds)
 
+(defvar my-leader)
+
 (use-package elfeed
   :ensure t
   :commands elfeed
+  :general
+  (:keymaps 'elfeed-search-mode-map
+            :states 'normal
+            "gr" #'elfeed-update)
   :init
   (setq elfeed-db-directory (expand-file-name "~/Dropbox/.elfeed"))
   (setq elfeed-feeds
