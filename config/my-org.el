@@ -81,6 +81,17 @@
   (interactive)
   (counsel-find-file my-org-dir))
 
+(defun my-org-insert-todo-at-point ()
+  (interactive)
+  (forward-line)
+  (beginning-of-line)
+  (org-capture 0 "i")
+  (evil-insert-state nil))
+
+(defun my-org-set-created ()
+  (interactive)
+  (org-set-property "CREATED" (format-time-string (org-time-stamp-format nil t))))
+
 (my-major-mode-def org-mode-map
  "" '(nil :which-key "org-mode")
 
@@ -91,7 +102,9 @@
  "w" #'org-refile
  "a" #'org-archive-subtree
  "p" #'org-set-property
- "P" #'org-set-property-and-value)
+ "P" #'org-set-property-and-value
+ "s" #'org-schedule
+ "i" #'my-org-insert-todo-at-point :which-key "insert-todo-at-point")
 
 (general-define-key
  :prefix (concat my-leader "o")

@@ -21,6 +21,6 @@
     "w" #'save-buffer))
 
 (general-create-definer my-major-mode-def
-  :states '(normal insert)
+  :states '(normal insert visual)
   :prefix (concat my-leader "m")
   :non-normal-prefix "M-m")
