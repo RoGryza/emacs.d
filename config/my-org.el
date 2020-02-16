@@ -71,24 +71,24 @@
          (file+headline my-bookmarks-file "Bookmarks")
          "* %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:")))
 
-(defun my-org-capture ()
-  (interactive)
-  (if (fboundp 'counsel-org-capture)
-      (counsel-org-capture)
-    (org-capture)))
-
 (defun my-org-find-file ()
+  "Find a file under `my-org-dir'."
   (interactive)
   (counsel-find-file my-org-dir))
 
 (defun my-org-insert-todo-at-point ()
+  "Insert todo with \"i\" template at the end of current subtree."
   (interactive)
-  (forward-line)
-  (beginning-of-line)
+  (when (org-get-todo-state)
+    (org-up-element))
+  (org-back-to-heading)
   (org-capture 0 "i")
+  (org-move-subtree-down)
+  (org-demote-subtree)
   (evil-insert-state nil))
 
 (defun my-org-set-created ()
+  "Set created property to current time."
   (interactive)
   (org-set-property "CREATED" (format-time-string (org-time-stamp-format nil t))))
 
@@ -113,7 +113,7 @@
  "" '(nil :which-key "org")
 
  "a" #'org-agenda
- "c" '(my-org-capture :which-key "org-capture")
+ "c" #'org-capture
  "p" #'my-org-find-file
  "s" #'org-save-all-org-buffers)
 
@@ -125,6 +125,12 @@
 
  "y" #'org-store-link
  "p" #'org-insert-last-stored-link)
+
+(defun my-org-hook ()
+  (interactive)
+  (add-hook 'before-save-hook #'org-align-all-tags nil t))
+
+(add-hook 'org-mode-hook #'my-org-hook)
 
 (use-package evil-org
   :ensure t

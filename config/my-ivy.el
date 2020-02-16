@@ -11,8 +11,9 @@
 
   (with-eval-after-load 'projectile
     (with-eval-after-load 'ivy
+      (defvar projectile-completion-system)
       (setq projectile-completion-system 'ivy)))
-  
+
   (global-set-key (kbd "C-s") 'swiper-isearch)
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
