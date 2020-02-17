@@ -44,14 +44,6 @@
   (if (not (package-installed-p pkg))
       (package-install pkg)))
 
-(setenv "PATH"
-        (concat (expand-file-name "~/bin") ":"
-                (expand-file-name "~/.local/bin") ":"
-                (getenv "PATH")))
-(add-to-list 'exec-path (expand-file-name "~/bin"))
-(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
-(add-to-list 'exec-path (expand-file-name "~/google-cloud-sdk/bin"))
-
 (use-package tree-mode
   :ensure t)
 (require 'glade-mode)
