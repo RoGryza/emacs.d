@@ -1,5 +1,6 @@
 ;; Fix bug with elpa returning bad request
 (defvar gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(setenv "SSH_AUTH_SOCK" "/run/user/1000/gnupg/S.gpg-agent.ssh")
 
 (add-to-list 'load-path (concat user-emacs-directory "vendor"))
 (add-to-list 'load-path (concat user-emacs-directory "config"))
@@ -47,7 +48,6 @@
 (use-package tree-mode
   :ensure t)
 (require 'glade-mode)
-;; (require 'enaml-mode)
 
 (use-package undo-tree
   :ensure t
