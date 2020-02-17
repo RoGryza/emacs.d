@@ -32,9 +32,7 @@
 
 (use-package poetry
   :ensure t
-  :commands poetry
-  :config
-  (poetry-tracking-mode))
+  :commands poetry)
 
 (use-package py-isort
   :ensure t
