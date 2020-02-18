@@ -3,6 +3,8 @@
 (defvar my-leader)
 (declare my-major-mode-def)
 
+(defvar counsel-find-file-map)
+
 (require 'cl)
 (require 'f)
 
@@ -74,7 +76,17 @@
 (defun my-org-find-file ()
   "Find a file under `my-org-dir'."
   (interactive)
-  (counsel-find-file my-org-dir))
+  (let ((default-directory my-org-dir))
+    (ivy-read
+     "Find org file: "
+     (mapcar (lambda (f) (cons (f-filename f) f))
+             (f-files "." (lambda (file) (equal (f-ext file) "org"))))
+     :require-match t
+     :action (lambda (p) (find-file (cdr p)))
+     :require-match 'confirm-after-completion
+     :keymap counsel-find-file-map
+     :caller 'my-org-find-file)))
+
 
 (defun my-org-insert-todo-at-point ()
   "Insert todo with \"i\" template at the end of current subtree."
