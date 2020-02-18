@@ -98,6 +98,7 @@
 (require 'my-go)
 (require 'my-haskell)
 (require 'my-markdown)
+(require 'my-nix)
 (require 'my-python)
 (require 'my-racket)
 (require 'my-rust)
