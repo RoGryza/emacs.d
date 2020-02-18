@@ -24,3 +24,6 @@
   :states '(normal insert visual)
   :prefix (concat my-leader "m")
   :non-normal-prefix "M-m")
+
+(use-package hydra
+  :ensure t)

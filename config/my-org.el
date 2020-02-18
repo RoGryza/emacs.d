@@ -92,19 +92,24 @@
   (interactive)
   (org-set-property "CREATED" (format-time-string (org-time-stamp-format nil t))))
 
-(my-major-mode-def org-mode-map
- "" '(nil :which-key "org-mode")
+(defhydra my-hydra-org (:columns 3)
+  "Org"
+  ("c" org-ctrl-c-ctrl-c "C-c")
+  ("t" org-todo "TODO")
+  ("w" org-refile "Refile")
+  ("a" org-archive-subtree "Archive Subtree")
+  ("p" org-set-property "Set Property")
+  ("P" org-set-property-and-value "Set Property and Value")
+  ("s" org-schedule "Schedule")
+  ("i" my-org-insert-todo-at-point "Insert TODO" :exit t)
 
- "<" #'org-promote-subtree
- ">" #'org-demote-subtree
- "c" '(org-ctrl-c-ctrl-c :which-key "C-c")
- "t" #'org-todo
- "w" #'org-refile
- "a" #'org-archive-subtree
- "p" #'org-set-property
- "P" #'org-set-property-and-value
- "s" #'org-schedule
- "i" #'my-org-insert-todo-at-point :which-key "insert-todo-at-point")
+  ("h" org-metaleft "Promote Subtree/Move Column Left")
+  ("l" org-metaright "Demote Subtree/Move Column Right")
+  ("j" org-metadown "Move Down")
+  ("k" org-metaup "Move Up"))
+
+(my-major-mode-def org-mode-map
+ "" '(my-hydra-org/body :which-key "org-mode"))
 
 (general-define-key
  :prefix (concat my-leader "o")
