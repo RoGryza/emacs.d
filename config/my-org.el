@@ -145,6 +145,7 @@
 
 (defun my-org-hook ()
   (interactive)
+  (real-auto-save-mode)
   (add-hook 'before-save-hook #'org-align-all-tags nil t))
 
 (add-hook 'org-mode-hook #'my-org-hook)

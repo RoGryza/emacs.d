@@ -56,6 +56,10 @@
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
+(use-package real-auto-save
+  :ensure t
+  :commands real-auto-save-mode)
+
 (use-package rg
   :ensure t
   :commands rg-map)
