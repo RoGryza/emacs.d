@@ -44,18 +44,8 @@
 (use-package pip-requirements
   :ensure t)
 
-(use-package pyenv-mode-auto
-  :ensure t)
-
 (use-package blacken
   :ensure t
   :after elpy
   :config
   (add-hook 'elpy-mode-hook 'blacken-mode))
-
-(use-package auto-virtualenv
-  :ensure t
-  :after (elpy projectile)
-  :config
-  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-  (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
