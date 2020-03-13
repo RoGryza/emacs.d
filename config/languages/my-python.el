@@ -1,11 +1,16 @@
 (provide 'my-python)
 
+(defvar flycheck-checker)
+(defvar python-shell-interpreter)
+(defvar python-shell-interpreter-args)
+
 (defun my-python-hooks ()
   (interactive)
   (setq indent-tabs-mode nil
         tab-width 4
         python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt"))
+        python-shell-interpreter-args "-i --simple-prompt")
+  (setq-local flycheck-checker 'python-pylint))
 
 ;; Run flycheck inside a virtualenv
 (defun flycheck-virtualenv-executable-find (executable)
@@ -18,6 +23,9 @@
 (defun flycheck-virtualenv-setup ()
   "Setup Flycheck for the current virtualenv."
   (setq-local flycheck-executable-find #'flycheck-virtualenv-executable-find))
+
+(with-eval-after-load 'flycheck
+  (flycheck-add-next-checker 'python-pylint 'python-mypy))
 
 (use-package elpy
   :ensure elpy
