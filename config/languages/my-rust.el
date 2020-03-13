@@ -1,5 +1,8 @@
 (provide 'my-rust)
 
+(defvar lsp-rust-server)
+(setq lsp-rust-server 'rust-analyzer)
+
 (defun my-rust-hook ()
   (setq indent-tabs-mode nil
         tab-width 2
